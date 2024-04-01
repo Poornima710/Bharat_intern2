@@ -1,0 +1,32 @@
+<title>weather</title>
+</head>
+<body>
+    <h1>Welcome to the weather app <span id="cityName"></span></h1>
+    <form>
+        <label>enter the cityname</label>
+        <input type="text" id="city" />
+        <button type="button" id="submit"> Get weather</button>
+    </form><p>Temp is</p>
+    <p id="temp"></p>
+    <script>
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': 'eed3e9d2bcmsh6c8f83e1d4d3100p1aae03jsnd5bf07586517',
+                'X-RapidAPI-Host': 'weather-by-api-ninjas.p.rapidapi.com'
+            }};
+        const weatherapp = (city) => {
+            cityName.innerHTML = city
+            fetch('https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=' + city, options)
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response)
+                    temp.innerHTML = response.temp
+                })}
+        submit.addEventListener("click", (e) => {
+            e.preventDefault()
+            weatherapp(city.value)})
+        weatherapp("pune")
+    </script>
+</body>
+</html>
